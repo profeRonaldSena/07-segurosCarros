@@ -27,6 +27,7 @@ const BUTTON = styled.button`
  text-transform: uppercase;
  font-weight: bold;
  border: none;
+ margin-top: 2rem;
 
  &:hover {
   background-color: #26c6da;
