@@ -6,11 +6,17 @@ const HEADER = styled.header`
  font-weight: bold;
  color: #fff;
 `
+const H1 = styled.h1`
+ font-size: 2rem;
+ margin: 0;
+ font-family: 'Slabo 27px', serif;
+ text-align: center;
+`
 
 const Header = ({ titulo }) => {
  return (
   <HEADER>
-   <h1>{titulo}</h1>
+   <H1>{titulo}</H1>
   </HEADER>
  )
 }
