@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import { useState } from 'react'
 
 const DIV = styled.div`
  display: flex;
@@ -34,13 +35,48 @@ const BUTTON = styled.button`
   cursor: pointer;
  }
 `
+const ERROR = styled.div`
+ background-color: red;
+ color: white;
+ padding: 1rem;
+ width: 100%;
+ text-align: center;
+`
 
 const Formulario = () => {
+ // crear estado
+ const [datos, setDatos] = useState({
+  marca: '',
+  year: '',
+  plan: '',
+ })
+ //  extraer extados "destructuring"
+ const { marca, year, plan } = datos
+ //  leer el formulario y poner los datos en el state
+ const obtenerInfo = (e) => {
+  setDatos({
+   ...datos,
+   [e.target.name]: e.target.value,
+  })
+ }
+ //  validar formulario cuando el usuario presiona el boton enviar
+ const [error, setError] = useState(false)
+ const cotizarSeguro = (e) => {
+  e.preventDefault()
+  // campos vacios
+  if (marca.trim() === '' || year.trim() === '' || plan.trim() === '') {
+   setError(true)
+   return
+  }
+  setError(false)
+ }
+
  return (
-  <form>
+  <form onSubmit={cotizarSeguro}>
+   {error ? <ERROR>Todos los campos son obligatorios</ERROR> : null}
    <DIV>
     <LABEL>Marca</LABEL>
-    <SELECT>
+    <SELECT name='marca' value={marca} onChange={obtenerInfo}>
      <option value=''>---Seleccione---</option>
      <option value='americano'>Americano</option>
      <option value='europeo'>Europeo</option>
@@ -49,7 +85,8 @@ const Formulario = () => {
    </DIV>
    <DIV>
     <LABEL>Año</LABEL>
-    <SELECT>
+    <SELECT name='year' value={year} onChange={obtenerInfo}>
+     <option value=''>---Seleccione---</option>
      <option value='2023'>2023</option>
      <option value='2022'>2022</option>
      <option value='2021'>2021</option>
@@ -63,12 +100,24 @@ const Formulario = () => {
    </DIV>
    <DIV>
     <LABEL>Plan</LABEL>
-    <INPUT type='radio' name='plan' value='basico' />
+    <INPUT
+     type='radio'
+     name='plan'
+     value='basico'
+     checked={plan === 'basico'}
+     onChange={obtenerInfo}
+    />
     Basico
-    <INPUT type='radio' name='plan' value='completo' />
+    <INPUT
+     type='radio'
+     name='plan'
+     value='completo'
+     checked={plan === 'completo'}
+     onChange={obtenerInfo}
+    />
     Completo
    </DIV>
-   <BUTTON type='button'>Cotizar</BUTTON>
+   <BUTTON type='submit'>Cotizar</BUTTON>
   </form>
  )
 }
