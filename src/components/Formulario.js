@@ -18,6 +18,17 @@ const SELECT = styled.select`
 const INPUT = styled.input`
  margin: 0 1rem;
 `
+const BUTTON = styled.button`
+ background-color: #00838f;
+ font-size: 16px;
+ width: 100%;
+ padding: 1rem;
+ color: #fff;
+ text-transform: uppercase;
+ font-weight: bold;
+ border: none;
+`
+
 const Formulario = () => {
  return (
   <form>
@@ -51,7 +62,7 @@ const Formulario = () => {
     <INPUT type='radio' name='plan' value='completo' />
     Completo
    </DIV>
-   <button type='button'>Cotizar</button>
+   <BUTTON type='button'>Cotizar</BUTTON>
   </form>
  )
 }
